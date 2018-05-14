@@ -1,5 +1,5 @@
 # INFO201 Group Project:
-#  Title : **Crime Data in Los Angeles 2010-Present**
+#  Title: **Crime Data in Los Angeles 2010-Present**
 ##### Group members: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu
 
 
