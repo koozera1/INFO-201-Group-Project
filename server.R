@@ -7,11 +7,22 @@ library(stringr)
 
 #Read in data in csv file
 data <- read.csv("data/LA-crimes.csv", stringsAsFactors = FALSE)
+vari <- strsplit(data$Location, ",")
+
+test %>%
+
+
+data <- data %>%
+  mutate(lat = lapply(substr(vari, 2, nchar(vari)))) %>%
+  mutate(lng = substr(data$Location[2], 1, nchar(data$Location) - 2))
+
 
 data <- mutate(data, Year.Occurred = str_sub(data$Date.Occurred, start = -4))
 
 # Start shiny server
 shinyServer(function(input, output) {
+
+  #weapons bar graph
   output$weapons_bar <- renderPlot({
     if (input$year != "All") {
       filtered <- filter(data, Year.Occurred == input$year)
@@ -35,5 +46,12 @@ shinyServer(function(input, output) {
     }
     p
   })
+  
 })
 
+
+test <- strsplit(data$Location, ",")
+test[[1]][1]
+
+
+lapply()
