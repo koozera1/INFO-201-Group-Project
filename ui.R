@@ -6,6 +6,28 @@ library(shiny)
 shinyUI(navbarPage(
   "Crime in LA",
   
+  
+  # Creates a tab for the bar graph
+  tabPanel(
+    "Summary",
+    titlePanel("Crime Rates In LA"),
+    
+    # Create a sidebar layout
+    sidebarLayout(
+      
+      # Create a sidebar panel
+      sidebarPanel(
+        
+        
+      ),
+      
+      # Main panel: display plotly  bar
+      mainPanel(
+        #plotlyOutput("bar")
+      )
+    )
+  ),
+  
   # Creates a tab for the bar graph
   tabPanel(
     "Map",
@@ -18,6 +40,46 @@ shinyUI(navbarPage(
       sidebarPanel(
         
 
+      ),
+      
+      # Main panel: display plotly  bar
+      mainPanel(
+        #plotlyOutput("bar")
+      )
+    )
+  ),
+  
+  tabPanel(
+    "Line",
+    titlePanel("Crime Rates In LA"),
+    
+    # Create a sidebar layout
+    sidebarLayout(
+      
+      # Create a sidebar panel
+      sidebarPanel(
+        
+        
+      ),
+      
+      # Main panel: display plotly  bar
+      mainPanel(
+        #plotlyOutput("bar")
+      )
+    )
+  ),
+  
+  tabPanel(
+    "Bar",
+    titlePanel("Crime Rates In LA"),
+    
+    # Create a sidebar layout
+    sidebarLayout(
+      
+      # Create a sidebar panel
+      sidebarPanel(
+        
+        
       ),
       
       # Main panel: display plotly  bar
