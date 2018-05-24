@@ -1,6 +1,15 @@
 # Libraries
 library(plotly)
 library(shiny)
+library(dplyr)
+
+select_year <- append(
+  unlist(
+    distinct(data, Year.Occurred) %>% arrange(Year.Occurred),
+    use.names = FALSE
+  ),
+  "All"
+)
 
 # ui.R
 shinyUI(navbarPage(
@@ -23,6 +32,18 @@ shinyUI(navbarPage(
       # Main panel: display plotly  bar
       mainPanel(
         #plotlyOutput("bar")
+      )
+    )
+  ),
+  tabPanel(
+    "Weapons",
+    titlePanel("Types of Weapons Used"),
+    sidebarLayout(
+      sidebarPanel(
+        selectInput("year", label = "Year Occurred", choices = select_year)
+      ),
+      mainPanel(
+        plotOutput("weapons_bar")
       )
     )
   )
