@@ -40,7 +40,7 @@ shinyServer(function(input, output) {
 
   #weapons bar graph
   output$weapons_bar <- renderPlot({
-    if (input$year != "All") {
+    if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
       p <- ggplot() +
         geom_bar(mapping = aes(
@@ -48,7 +48,7 @@ shinyServer(function(input, output) {
         )) +
         labs(
           x = input$x,
-          title = paste0("Weapons Used in ", input$year)
+          title = paste0("Weapons used in ", input$year)
         )
     } else {
       p <- ggplot() +
@@ -57,7 +57,7 @@ shinyServer(function(input, output) {
         )) +
         labs(
           x = "Weapon used",
-          title = paste0("Weapons Used in ", input$year, " Years")
+          title = paste0("Weapons used in ", input$year, " years")
         )
     }
     p

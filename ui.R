@@ -11,7 +11,7 @@ select_year <- append(
     distinct(data, Year.Occurred) %>% arrange(Year.Occurred),
     use.names = FALSE
   ),
-  "All"
+  "all"
 )
 
 # ui.R
@@ -146,3 +146,4 @@ shinyUI(navbarPage(
     )
   )
 ))
+
