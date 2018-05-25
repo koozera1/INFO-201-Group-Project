@@ -1,27 +1,38 @@
 # Libraries
 library(plotly)
 library(shiny)
+library(dplyr)
 library(shinythemes)
+
+
+# values to select the year in weapons
+select_year <- append(
+  unlist(
+    distinct(data, Year.Occurred) %>% arrange(Year.Occurred),
+    use.names = FALSE
+  ),
+  "All"
+)
 
 # ui.R
 shinyUI(navbarPage(
   theme = shinytheme("journal"), "Crime in LA",
+
   
-  
-  # Creates a tab for the bar graph
+  # Creates a tab for the summary
   tabPanel(
     "Summary",
     titlePanel("Crime Rates In LA"),
-    
+
     # Create a sidebar layout
     sidebarLayout(
-      
+
       # Create a sidebar panel
       sidebarPanel(
-        
-        
+
+
       ),
-      
+
       # Main panel: display plotly  bar
       mainPanel(
         #plotlyOutput("bar")
@@ -34,10 +45,10 @@ shinyUI(navbarPage(
     "Map",
     titlePanel("Map of Crimes in Los Angeles"),
     p("The map may take a while to load due to the large amount of data."),
-    
+
     # Create a sidebar layout
     sidebarLayout(
-      
+
       # Create a sidebar panel
       sidebarPanel(
         
@@ -81,39 +92,53 @@ shinyUI(navbarPage(
     )
   ),
   
+  # tab for weapons visualization
+  tabPanel(
+    "Weapons",
+    titlePanel("Types of Weapons Used"),
+    sidebarLayout(
+      sidebarPanel(
+        selectInput("year", label = "Year Occurred", choices = select_year)
+      ),
+      mainPanel(
+        plotOutput("weapons_bar")
+      )
+    )
+  ),
+  
   tabPanel(
     "Line",
     titlePanel("Crime Rates In LA"),
-    
+
     # Create a sidebar layout
     sidebarLayout(
-      
+
       # Create a sidebar panel
       sidebarPanel(
-        
-        
+
+
       ),
-      
+
       # Main panel: display plotly  bar
       mainPanel(
         #plotlyOutput("bar")
       )
     )
   ),
-  
+
   tabPanel(
     "Bar",
     titlePanel("Crime Rates In LA"),
-    
+
     # Create a sidebar layout
     sidebarLayout(
-      
+
       # Create a sidebar panel
       sidebarPanel(
-        
-        
+
+
       ),
-      
+
       # Main panel: display plotly  bar
       mainPanel(
         #plotlyOutput("bar")
