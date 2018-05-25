@@ -20,7 +20,8 @@ data$long <- as.numeric(substr(data$long, 0, nchar(data$long) - 1))
 data <- data %>% 
   filter(lat != 0 & long != 0)
 
-data <- mutate(data, Year.Occurred = str_sub(data$Date.Occurred, start = -4))
+#Create a new column with the year
+data$Year.Occurred = str_sub(data$Date.Occurred, start = -4)
 
 # Start shiny server
 shinyServer(function(input, output) {
