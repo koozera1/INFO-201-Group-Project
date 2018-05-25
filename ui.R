@@ -1,10 +1,11 @@
 # Libraries
 library(plotly)
 library(shiny)
+library(shinythemes)
 
 # ui.R
 shinyUI(navbarPage(
-  "Crime in LA",
+  theme = shinytheme("journal"), "Crime in LA",
   
   
   # Creates a tab for the bar graph
@@ -28,10 +29,11 @@ shinyUI(navbarPage(
     )
   ),
   
-  # Creates a tab for the bar graph
+  # Creates a tab for the map
   tabPanel(
     "Map",
-    titlePanel("State vs Population"),
+    titlePanel("Map of Crimes in Los Angeles"),
+    p("The map may take a while to load due to the large amount of data."),
     
     # Create a sidebar layout
     sidebarLayout(
@@ -39,12 +41,42 @@ shinyUI(navbarPage(
       # Create a sidebar panel
       sidebarPanel(
         
-
+        selectInput(
+          "race",
+          label = "Victim Race",
+          choices = list(
+            "White" = "W",
+            "Hispanic" = "H",
+            "Black" = "B",
+            "Other" = "O"
+          )
+        ),
+        
+        sliderInput("range", "Victim Age", min(data$Victim.Age), max(data$Victim.Age),
+                    value = range(data$Victim.Age), step = 1
+        ),
+        
+        selectInput(
+          "crime",
+          label = "Crime Description",
+          choices = list(
+            "Robbery" = "ROBBERY",
+            "Attempted Robbery" = "ATTEMPTED ROBBERY",
+            "Bomb Scare" = "BOMB SCARE",
+            "Forced Rape" = "RAPE, FORCIBLE",
+            "Attempted Rape" = "RAPE, ATTEMPTED",
+            "Kidnapping" = "KIDNAPPING",
+            "Theft($950 and under)" = "THEFT PLAIN - PETTY ($950 & UNDER)",
+            "Theft($950.01 and over)" = 
+              "THEFT-GRAND ($950.01 & OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD0036"  ,
+            "Arson" = "ARSON"
+          )
+        )
       ),
       
-      # Main panel: display plotly  bar
+      # Main panel: display map
       mainPanel(
-        #plotlyOutput("bar")
+        leafletOutput("mymap")
       )
     )
   ),
