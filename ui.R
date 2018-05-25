@@ -3,9 +3,12 @@ library(plotly)
 library(shiny)
 library(dplyr)
 library(shinythemes)
-
+library(stringr)
+library(leaflet)
 
 # values to select the year in weapons
+data <- read.csv("data/LA-crimes.csv", stringsAsFactors = FALSE)
+data$Year.Occurred <- str_sub(data$Date.Occurred, start = -4)
 select_year <- append(
   unlist(
     distinct(data, Year.Occurred) %>% arrange(Year.Occurred),
@@ -18,7 +21,7 @@ select_year <- append(
 shinyUI(navbarPage(
   theme = shinytheme("journal"), "Crime in LA",
 
-  
+
   # Creates a tab for the summary
   tabPanel(
     "Summary",
@@ -28,18 +31,15 @@ shinyUI(navbarPage(
     sidebarLayout(
 
       # Create a sidebar panel
-      sidebarPanel(
-
-
-      ),
+      sidebarPanel(),
 
       # Main panel: display plotly  bar
       mainPanel(
-        #plotlyOutput("bar")
+        # plotlyOutput("bar")
       )
     )
   ),
-  
+
   # Creates a tab for the map
   tabPanel(
     "Map",
@@ -51,7 +51,6 @@ shinyUI(navbarPage(
 
       # Create a sidebar panel
       sidebarPanel(
-        
         selectInput(
           "race",
           label = "Victim Race",
@@ -62,11 +61,13 @@ shinyUI(navbarPage(
             "Other" = "O"
           )
         ),
-        
-        sliderInput("range", "Victim Age", min(data$Victim.Age), max(data$Victim.Age),
-                    value = range(data$Victim.Age), step = 1
+
+        sliderInput(
+          "range",
+          label = "Victim Age", min(data$Victim.Age), max(data$Victim.Age),
+          value = range(data$Victim.Age), step = 1
         ),
-        
+
         selectInput(
           "crime",
           label = "Crime Description",
@@ -78,34 +79,39 @@ shinyUI(navbarPage(
             "Attempted Rape" = "RAPE, ATTEMPTED",
             "Kidnapping" = "KIDNAPPING",
             "Theft($950 and under)" = "THEFT PLAIN - PETTY ($950 & UNDER)",
-            "Theft($950.01 and over)" = 
-              "THEFT-GRAND ($950.01 & OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD0036"  ,
+            "Theft($950.01 and over)" =
+              "THEFT-GRAND ($950.01 & OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD0036",
             "Arson" = "ARSON"
           )
         )
       ),
-      
+
       # Main panel: display map
       mainPanel(
         leafletOutput("mymap")
       )
     )
   ),
-  
+
   # tab for weapons visualization
   tabPanel(
     "Weapons",
     titlePanel("Types of Weapons Used"),
     sidebarLayout(
       sidebarPanel(
-        selectInput("year", label = "Year Occurred", choices = select_year)
+        selectInput("year", label = "Year Occurred", choices = select_year),
+        sliderInput(
+          "amount",
+          label = "Amount of data used", min(10000), max(count(data)),
+          value = 10000, step = 10000
+        )
       ),
       mainPanel(
         plotOutput("weapons_bar")
       )
     )
   ),
-  
+
   tabPanel(
     "Line",
     titlePanel("Crime Rates In LA"),
@@ -114,14 +120,11 @@ shinyUI(navbarPage(
     sidebarLayout(
 
       # Create a sidebar panel
-      sidebarPanel(
-
-
-      ),
+      sidebarPanel(),
 
       # Main panel: display plotly  bar
       mainPanel(
-        #plotlyOutput("bar")
+        # plotlyOutput("bar")
       )
     )
   ),
@@ -134,14 +137,11 @@ shinyUI(navbarPage(
     sidebarLayout(
 
       # Create a sidebar panel
-      sidebarPanel(
-
-
-      ),
+      sidebarPanel(),
 
       # Main panel: display plotly  bar
       mainPanel(
-        #plotlyOutput("bar")
+        # plotlyOutput("bar")
       )
     )
   )
