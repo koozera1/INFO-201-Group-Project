@@ -58,7 +58,7 @@ shinyServer(function(input, output) {
       data_sample <- sample_n(data, input$amount)
       p <- ggplot() +
         geom_bar(mapping = aes(
-          x = data$Weapon.Description, fill = data$Year.Occurred
+          x = data_sample$Weapon.Description, fill = data_sample$Year.Occurred
         )) +
         labs(
           x = "Weapon used",
