@@ -102,8 +102,8 @@ shinyUI(navbarPage(
         selectInput("year", label = "Year Occurred", choices = select_year),
         sliderInput(
           "amount",
-          label = "Amount of data used", min(10000), max(count(data)),
-          value = 10000, step = 10000
+          label = "Amount of data observed", min(100), max(count(data)),
+          value = 100, step = 100
         )
       ),
       mainPanel(
