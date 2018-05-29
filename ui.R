@@ -101,8 +101,8 @@ shinyUI(navbarPage(
   # tab for weapons visualization
   tabPanel(
     "Weapons",
-    titlePanel("Choose a year to learn more about frequencies of different types of weapons used in crimes."),
-    p("This tab "),
+    titlePanel("Weapons Used in Crimes"),
+    p("Choose a year to learn more about frequencies of different types of weapons used in crimes. "),
     sidebarLayout(
       sidebarPanel(
         selectInput("year", label = "Year Occurred", choices = select_year),
