@@ -38,12 +38,29 @@ shinyServer(function(input, output) {
         clusterOptions = markerClusterOptions()
       )
   })
-
+  
+  # weapons slider for amt of data obs
+  output$weapons_slider <- renderUI({
+    if (input$year != "all") {
+      filtered <- filter(data, Year.Occurred == input$year)
+      sliderInput(
+        "amount",
+        label = "Amount of data observed", min(100), max(count(filtered)),
+        value = 100, step = 1
+      )
+    } else {
+      sliderInput(
+        "amount",
+        label = "Amount of data observed", min(100), max(count(data)),
+        value = 100, step = 1
+      )
+    }
+  })
+    
   # weapons bar graph
   output$weapons_bar <- renderPlot({
     if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
-      #count(filtered) #for slider max()
       filtered_sample <- sample_n(filtered, input$amount)
       p <- ggplot() +
         geom_bar(mapping = aes(
@@ -52,9 +69,9 @@ shinyServer(function(input, output) {
         labs(
           x = input$x,
           title = paste0("Weapons used in ", input$year)
-        )
+        ) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
     } else {
-      #count(data) #for slider max()
       data_sample <- sample_n(data, input$amount)
       p <- ggplot() +
         geom_bar(mapping = aes(
@@ -63,7 +80,8 @@ shinyServer(function(input, output) {
         labs(
           x = "Weapon used",
           title = paste0("Weapons used in ", input$year, " years")
-        )
+        ) +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
     }
     p
   })

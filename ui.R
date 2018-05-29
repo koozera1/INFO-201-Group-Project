@@ -106,11 +106,7 @@ shinyUI(navbarPage(
     sidebarLayout(
       sidebarPanel(
         selectInput("year", label = "Year Occurred", choices = select_year),
-        sliderInput(
-          "amount",
-          label = "Amount of data observed", min(100), max(count(data)),
-          value = 100, step = 100
-        )
+        uiOutput("weapons_slider")
       ),
       mainPanel(
         plotOutput("weapons_bar")
