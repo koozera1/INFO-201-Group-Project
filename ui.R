@@ -31,7 +31,12 @@ shinyUI(navbarPage(
     sidebarLayout(
 
       # Create a sidebar panel
-      sidebarPanel(),
+      sidebarPanel(
+        helpText("Our final project draws on data from the public crime dataset collected by the local government of Los Angeles starting in 2010. 
+                 Our project intends to analyze distressed areas of crimes, victims, use of weapons, and other information. 
+                 The map provides the audience with detailed information about the location, frequency of each type of crimes. You can gain insight on the public safety of the area by using the analysis. 
+                 Contributers: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu.")
+      ),
 
       # Main panel: display plotly  bar
       mainPanel(
@@ -44,7 +49,7 @@ shinyUI(navbarPage(
   tabPanel(
     "Map",
     titlePanel("Map of Crimes in Los Angeles"),
-    p("The map may take a while to load due to the large amount of data."),
+    p("The map display distressed areas based on victims' races, age ranges and the type of crimes. It may take a while to load due to the large amount of data."),
 
     # Create a sidebar layout
     sidebarLayout(
@@ -96,7 +101,8 @@ shinyUI(navbarPage(
   # tab for weapons visualization
   tabPanel(
     "Weapons",
-    titlePanel("Types of Weapons Used"),
+    titlePanel("Choose a year to learn more about frequencies of different types of weapons used in crimes."),
+    p("This tab "),
     sidebarLayout(
       sidebarPanel(
         selectInput("year", label = "Year Occurred", choices = select_year),
