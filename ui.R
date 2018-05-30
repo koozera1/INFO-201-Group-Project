@@ -31,7 +31,8 @@ shinyUI(navbarPage(
       "We used the dataset ",
 
       a(
-        href = "https://catalog.data.gov/dataset/crime-data-from-2010-to-present",
+        href = "https://catalog.data.gov/dataset/crime-data-from-2010-to-
+        present",
         "Crime Data from 2010 to Present"
       ),
 
@@ -76,12 +77,14 @@ shinyUI(navbarPage(
           )
         ),
 
+        # User input of victim's age
         sliderInput(
           "range",
           label = "Victim Age", min(data$Victim.Age), max(data$Victim.Age),
           value = range(data$Victim.Age), step = 1
         ),
 
+        # User input of crime description
         selectInput(
           "crime",
           label = "Crime Description",
@@ -111,14 +114,22 @@ shinyUI(navbarPage(
   tabPanel(
     "Weapons",
     titlePanel("Weapons Used in Crimes"),
+
     p("Choose a year to learn more about frequencies of different types of
        weapons used in crimes."),
     p("A new set of data is randomly selected every time a widget's selection
        is changed. It may take a while to load due to the large amount of
        data."),
+
+    # Create sidebar layout
     sidebarLayout(
+
+      # Create sidebar panel
       sidebarPanel(
+
+        # User input of a specific year
         selectInput("year", label = "Year occurred", choices = select_year),
+
         uiOutput("weapons_slider"),
         radioButtons(
           "sort",
@@ -126,40 +137,48 @@ shinyUI(navbarPage(
           selected = "Alphabetical"
         )
       ),
+
+      # Main Panel: display weapons bar graph
       mainPanel(
         plotOutput("weapons_bar")
       )
     )
   ),
 
+  # Tab for demographic bar graph
   tabPanel(
-    "Race VS Age",
-    titlePanel("Crime Rates In LA"),
-    p("This graph gives a visual representation of how age and race are affected 
-      by crimes"),
+    "Demographics",
+    titlePanel("Crime Rate by Demographic"),
+
+    p("This graph portrays the relationship between either age and race or age
+      and the time the crime was committed. The graph may take a while to
+      load due to the large amount of data."),
+
+    # Create sidebar panel
     sidebarPanel(
-      # Input to select variable to map
+
+      # Input to select variable for bar graph
       selectInput(
-        "Race",
-        label = "Race",
-        choices = list("Victims' Race" = "Victim.Descent")
+        "xvar",
+        label = "X Variable",
+        choices = list(
+          "Race" = "Victim.Descent",
+          "Time Crime Occurred" = "Time.Occurred"
+        )
       ),
-      selectInput(
-        "Age",
-        label = "Age",
-        choices = list("Victim's Age" = "Victim.Age")
+
+      # User select victim's age
+      sliderInput(
+        "barrange",
+        label = "Victim Age", min(data$Victim.Age), max(data$Victim.Age),
+        value = range(data$Victim.Age), step = 1
       ),
-      selectInput(
-        "Freq",
-        label = "Occurance of each Race",
-        choices = list("Occurance" = "Freq")
-      ),
-      p("Due to some difficulty with the program, the Legend of the graph
-        looks like that. But each letter and color corresponds to each race like
-        this O = Other, B = Black, W = White, A = Asian and
-        H = Hispanic")
-      
+
+      p("Each letter corresponds to a different race. For instance, O = Other,
+        B = Black, W = White and H = Hispanic")
     ),
+
+    # Main Panel: display demographic bar graph
     mainPanel(
       plotOutput("bar")
     )

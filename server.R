@@ -26,7 +26,6 @@ data <- data %>%
 data$Year.Occurred <- str_sub(data$Date.Occurred, start = -4)
 
 
-
 # Start shiny server
 shinyServer(function(input, output) {
 
@@ -112,10 +111,15 @@ shinyServer(function(input, output) {
     }
     p
   })
-  # Race versus Age bar graph
+
+  # Race versus Age bar graph with other demographic information
   output$bar <- renderPlot({
-    return(build_graph(use_data, use_data[[input$Age]], use_data[[input$Freq]],
-                       use_data[[input$Race]]))
+    data <- data %>%
+      filter(Victim.Descent == "W" | Victim.Descent == "B" |
+        Victim.Descent == "O" | Victim.Descent == "H") %>%
+      filter(Victim.Age >= input$barrange[1] & Victim.Age <= input$barrange[2])
+
+    ggplot(data, aes(x = data[[input$xvar]])) + geom_bar() +
+      xlab(input$xvar) + ylab("Count")
   })
-  
 })
