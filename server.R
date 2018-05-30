@@ -23,6 +23,8 @@ data <- data %>%
 # Create a new column with the year
 data$Year.Occurred <- str_sub(data$Date.Occurred, start = -4)
 
+
+
 # Start shiny server
 shinyServer(function(input, output) {
 
