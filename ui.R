@@ -32,10 +32,14 @@ shinyUI(navbarPage(
 
       # Create a sidebar panel
       sidebarPanel(
-        helpText("Our final project draws on data from the public crime dataset collected by the local government of Los Angeles starting in 2010. 
-                 Our project intends to analyze distressed areas of crimes, victims, use of weapons, and other information. 
-                 The map provides the audience with detailed information about the location, frequency of each type of crimes. You can gain insight on the public safety of the area by using the analysis. 
-                 Contributers: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu.")
+        helpText("Our final project draws on data from the public crime dataset
+           collected by the local government of Los Angeles starting in 2010.
+           Our project intends to analyze distressed areas of crimes, victims,
+           use of weapons, and other information.
+           The map provides the audience with detailed information about the
+           location, frequency of each type of crimes. You can gain insight on
+           the public safety of the area by using the analysis.
+           Contributors: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu.")
       ),
 
       # Main panel: display plotly  bar
@@ -49,7 +53,9 @@ shinyUI(navbarPage(
   tabPanel(
     "Map",
     titlePanel("Map of Crimes in Los Angeles"),
-    p("The map display distressed areas based on victims' races, age ranges and the type of crimes. It may take a while to load due to the large amount of data."),
+    p("The map display distressed areas based on victims' races, age ranges and
+       the type of crimes. It may take a while to load due to the large amount
+       of data."),
 
     # Create a sidebar layout
     sidebarLayout(
@@ -102,14 +108,18 @@ shinyUI(navbarPage(
   tabPanel(
     "Weapons",
     titlePanel("Weapons Used in Crimes"),
-    p("Choose a year to learn more about frequencies of different types of weapons used in crimes. "),
+    p("Choose a year to learn more about frequencies of different types of
+       weapons used in crimes."),
+    p("A new set of data is randomly selected every time a widget's selection is
+       changed. It may take a while to load due to the large amount of data."),
     sidebarLayout(
       sidebarPanel(
-        selectInput("year", label = "Year Occurred", choices = select_year),
-        sliderInput(
-          "amount",
-          label = "Amount of data observed", min(100), max(count(data)),
-          value = 100, step = 100
+        selectInput("year", label = "Year occurred", choices = select_year),
+        uiOutput("weapons_slider"),
+        radioButtons(
+          "sort",
+          label = "Sort by", choices = c("Alphabetical", "Count"),
+          selected = "Alphabetical"
         )
       ),
       mainPanel(
@@ -152,4 +162,3 @@ shinyUI(navbarPage(
     )
   )
 ))
-
