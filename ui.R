@@ -26,27 +26,14 @@ shinyUI(navbarPage(
   tabPanel(
     "Summary",
     titlePanel("Crime Rates In LA"),
-
-    # Create a sidebar layout
-    sidebarLayout(
-
-      # Create a sidebar panel
-      sidebarPanel(
-        helpText("Our final project draws on data from the public crime dataset
-           collected by the local government of Los Angeles starting in 2010.
-           Our project intends to analyze distressed areas of crimes, victims,
-           use of weapons, and other information.
-           The map provides the audience with detailed information about the
-           location, frequency of each type of crimes. You can gain insight on
-           the public safety of the area by using the analysis.
-           Contributors: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu.")
-      ),
-
-      # Main panel: display plotly  bar
-      mainPanel(
-        # plotlyOutput("bar")
-      )
-    )
+      p("Our final project draws on data from the public crime dataset
+         collected by the local government of Los Angeles starting in 2010.
+         Our project intends to analyze distressed areas of crimes, victims,
+         use of weapons, and other information.
+         The map provides the audience with detailed information about the
+         location, frequency of each type of crimes. You can gain insight on
+         the public safety of the area by using the analysis.
+         Contributors: Andrea Koozer, Mustafa Ahamed, Jill Nguyen, Joy Liu.")
   ),
 
   # Creates a tab for the map
