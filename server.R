@@ -114,7 +114,8 @@ shinyServer(function(input, output) {
   })
   # Race versus Age bar graph
   output$bar <- renderPlot({
-    return(build_graph(data, data[[input$Race]], data[[input$Age]]))
+    return(build_graph(use_data, use_data[[input$Age]], use_data[[input$Freq]],
+                       use_data[[input$Race]]))
   })
   
 })

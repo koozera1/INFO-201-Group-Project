@@ -142,15 +142,21 @@ shinyUI(navbarPage(
       selectInput(
         "Race",
         label = "Race",
-        choices = list("Victim's Race" = "Victim.Descent")
+        choices = list("Victims' Race" = "Victim.Descent")
       ),
       selectInput(
         "Age",
         label = "Age",
         choices = list("Victim's Age" = "Victim.Age")
       ),
-      p("Due to some difficulty with the program, the x axis of the graph
-        looks like that. But O = Other, B = Black, W = White, A = Asian and
+      selectInput(
+        "Freq",
+        label = "Occurance of each Race",
+        choices = list("Occurance" = "Freq")
+      ),
+      p("Due to some difficulty with the program, the Legend of the graph
+        looks like that. But each letter and color corresponds to each race like
+        this O = Other, B = Black, W = White, A = Asian and
         H = Hispanic")
       
     ),
