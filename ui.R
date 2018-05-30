@@ -133,19 +133,29 @@ shinyUI(navbarPage(
   ),
 
   tabPanel(
-    "Line",
+    "Race VS Age",
     titlePanel("Crime Rates In LA"),
-
-    # Create a sidebar layout
-    sidebarLayout(
-
-      # Create a sidebar panel
-      sidebarPanel(),
-
-      # Main panel: display plotly  bar
-      mainPanel(
-        # plotlyOutput("bar")
-      )
+    p("This graph gives a visual representation of how age and race are affected 
+      by crimes"),
+    sidebarPanel(
+      # Input to select variable to map
+      selectInput(
+        "Race",
+        label = "Race",
+        choices = list("Victim's Race" = "Victim.Descent")
+      ),
+      selectInput(
+        "Age",
+        label = "Age",
+        choices = list("Victim's Age" = "Victim.Age")
+      ),
+      p("Due to some difficulty with the program, the x axis of the graph
+        looks like that. But O = Other, B = Black, W = White, A = Asian and
+        H = Hispanic")
+      
+    ),
+    mainPanel(
+      plotOutput("bar")
     )
   )
 ))

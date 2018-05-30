@@ -9,6 +9,8 @@ library(stringr)
 # Read in data in csv file
 data <- read.csv("data/LA-crimes.csv", stringsAsFactors = FALSE)
 vari <- strsplit(data$Location, ",")
+# source the race vs age bar graph
+source("./bar_graph.R")
 
 # Creating lat and long columns
 data$lat <- sapply(vari, "[[", 1)
@@ -110,4 +112,9 @@ shinyServer(function(input, output) {
     }
     p
   })
+  # Race versus Age bar graph
+  output$bar <- renderPlot({
+    return(build_graph(data, data[[input$Race]], data[[input$Age]]))
+  })
+  
 })
