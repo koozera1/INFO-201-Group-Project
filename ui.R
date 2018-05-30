@@ -35,7 +35,7 @@ shinyUI(navbarPage(
         helpText("Our final project draws on data from the public crime dataset
            collected by the local government of Los Angeles starting in 2010.
            Our project intends to analyze distressed areas of crimes, victims,
-           use of weapons, and other information. 
+           use of weapons, and other information.
            The map provides the audience with detailed information about the
            location, frequency of each type of crimes. You can gain insight on
            the public safety of the area by using the analysis.
@@ -117,9 +117,10 @@ shinyUI(navbarPage(
         selectInput("year", label = "Year occurred", choices = select_year),
         uiOutput("weapons_slider"),
         radioButtons(
-          "sort", label = "Sort by", choices = c("Alphabetical", "Count"),
+          "sort",
+          label = "Sort by", choices = c("Alphabetical", "Count"),
           selected = "Alphabetical"
-       )
+        )
       ),
       mainPanel(
         plotOutput("weapons_bar")
@@ -161,4 +162,3 @@ shinyUI(navbarPage(
     )
   )
 ))
-

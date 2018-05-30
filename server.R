@@ -38,7 +38,7 @@ shinyServer(function(input, output) {
         clusterOptions = markerClusterOptions()
       )
   })
-  
+
   # weapons slider for amt of data obs
   output$weapons_slider <- renderUI({
     if (input$year != "all") {
@@ -56,10 +56,9 @@ shinyServer(function(input, output) {
       )
     }
   })
-    
+
   # weapons bar graph
   output$weapons_bar <- renderPlot({
-
     if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
       filtered_sample <- sample_n(filtered, input$amount)
@@ -67,7 +66,7 @@ shinyServer(function(input, output) {
         sort <- reorder(
           filtered_sample$Weapon.Description,
           filtered_sample$Weapon.Description,
-          function(x)-length(x)
+          function(x) -length(x)
         )
       } else {
         sort <- filtered_sample$Weapon.Description
@@ -96,6 +95,4 @@ shinyServer(function(input, output) {
     }
     p
   })
-  
 })
-
