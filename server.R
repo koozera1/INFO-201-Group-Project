@@ -41,7 +41,7 @@ shinyServer(function(input, output) {
       )
   })
 
-  # weapons slider for amt of data obs
+  # weapons viz slider for amt of data obs
   output$weapons_slider <- renderUI({
     if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
@@ -64,6 +64,7 @@ shinyServer(function(input, output) {
     if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
       filtered_sample <- sample_n(filtered, input$amount)
+
       if (input$sort == "Count") {
         sort <- reorder(
           filtered_sample$Weapon.Description,
@@ -73,6 +74,7 @@ shinyServer(function(input, output) {
       } else {
         sort <- filtered_sample$Weapon.Description
       }
+
       p <- ggplot() +
         geom_bar(mapping = aes(
           x = sort
@@ -84,6 +86,7 @@ shinyServer(function(input, output) {
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
     } else {
       data_sample <- sample_n(data, input$amount)
+
       if (input$sort == "Count") {
         sort <- reorder(
           data_sample$Weapon.Description,
@@ -93,6 +96,7 @@ shinyServer(function(input, output) {
       } else {
         sort <- data_sample$Weapon.Description
       }
+
       p <- ggplot() +
         geom_bar(mapping = aes(
           x = sort, fill = data_sample$Year.Occurred
