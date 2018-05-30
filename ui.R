@@ -35,14 +35,16 @@ shinyUI(navbarPage(
         "Crime Data from 2010 to Present"
       ),
 
-      ". This data is drawn from data from the public crime dataset collected
-       by the local government of Los Angeles starting in 2010. Our project
-       intends to analyze distressed areas of crimes, victims, use of weapons,
-       and other information. Our main goal was to provide government officials
-       with the information they need to understand crimes in Los Angeles. The
-       map provides the audience with detailed information about the location,
-       frequency of each type of crimes. You can gain insight on the public
-       safety of the area by using the analysis."
+      ". This data is drawn from the public crime dataset collected by the local
+       government of Los Angeles starting in 2010. Our project intends to
+       analyze distressed areas of crimes, victims, use of weapons, and other
+       information. Our main goal was to provide government officials with the
+       information they need to understand crimes in Los Angeles. The map
+       provides the audience with detailed information about the location and
+       frequency of different types of crimes. You can gain insight on the
+       public safety of the area by using the analysis. The other visualizations
+       give specific details about the crimes, such as the weapons used and
+       other information."
     ))),
 
     tags$br(),
