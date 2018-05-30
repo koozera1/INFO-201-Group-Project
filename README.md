@@ -14,3 +14,6 @@ For our group project, we will be working with the dataset called **Crime Data f
 
 ### Tackling the issue
 We will start our project by reading the Comma Separated Values File (csv file) of the dataset provided by the website. In order to make the data easier to use and decrease the file size, we must select the columns that we wish to use and save the dataset as a new file. This will help decrease the loading time. In addition, we can reshape the dataset to only include the rows where there are no missing data points. We will be using various libraries such as shiny and ggplot2 in order to help build our project. I anticipate that it will be a challenge to load the file onto GitHub due to the large size of the dataset. In addition, as our group starts working at different times we will most likely face a lot of merge conflicts.
+
+###### link to our project:
+http://ahmedamustafa.shinyapps.io/INFO-201-Group-Project/
