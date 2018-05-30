@@ -46,25 +46,35 @@ shinyServer(function(input, output) {
       sliderInput(
         "amount",
         label = "Amount of data observed", min(100), max(count(filtered)),
-        value = 100, step = 1
+        value = 100, step = 100
       )
     } else {
       sliderInput(
         "amount",
         label = "Amount of data observed", min(100), max(count(data)),
-        value = 100, step = 1
+        value = 100, step = 100
       )
     }
   })
     
   # weapons bar graph
   output$weapons_bar <- renderPlot({
+
     if (input$year != "all") {
       filtered <- filter(data, Year.Occurred == input$year)
       filtered_sample <- sample_n(filtered, input$amount)
+      if (input$sort == "Count") {
+        sort <- reorder(
+          filtered_sample$Weapon.Description,
+          filtered_sample$Weapon.Description,
+          function(x)-length(x)
+        )
+      } else {
+        sort <- filtered_sample$Weapon.Description
+      }
       p <- ggplot() +
         geom_bar(mapping = aes(
-          x = filtered_sample$Weapon.Description
+          x = sort
         )) +
         labs(
           x = input$x,
@@ -79,6 +89,7 @@ shinyServer(function(input, output) {
         )) +
         labs(
           x = "Weapon used",
+          fill = "Year occurred",
           title = paste0("Weapons used in ", input$year, " years")
         ) +
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
