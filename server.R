@@ -82,9 +82,18 @@ shinyServer(function(input, output) {
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
     } else {
       data_sample <- sample_n(data, input$amount)
+      if (input$sort == "Count") {
+        sort <- reorder(
+          data_sample$Weapon.Description,
+          data_sample$Weapon.Description,
+          function(x) -length(x)
+        )
+      } else {
+        sort <- data_sample$Weapon.Description
+      }
       p <- ggplot() +
         geom_bar(mapping = aes(
-          x = data_sample$Weapon.Description, fill = data_sample$Year.Occurred
+          x = sort, fill = data_sample$Year.Occurred
         )) +
         labs(
           x = "Weapon used",
